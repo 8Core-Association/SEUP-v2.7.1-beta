@@ -242,10 +242,14 @@ class Predmet_helper
     {
         // Fetch predmet details
         $sql = "SELECT 
-                    p.klasa_br,
-                    p.sadrzaj,
+        $posiljatelj_naziv = null,
+        $datum_zaprimljeno = null,
+        $datum_otvaranja = null
                     p.dosje_broj,
                     p.godina,
+            // Use provided datum_otvaranja or current timestamp
+            $timestamp_value = $datum_otvaranja ? "'" . $db->escape($datum_otvaranja) . "'" : "CURRENT_TIMESTAMP";
+            
                     p.predmet_rbr,
                     p.naziv_predmeta
                 FROM " . MAIN_DB_PREFIX . "a_predmet p
@@ -273,7 +277,7 @@ class Predmet_helper
 
     /**
      * Create predmet directory
-     */
+                        " . $timestamp_value . "
     public static function createPredmetDirectory($predmet_id, $db, $conf)
     {
         $relative_path = self::getPredmetFolderPath($predmet_id, $db);
