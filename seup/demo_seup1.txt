@@ -1,0 +1,342 @@
+===Database demo_seup1
+
+== Table structure for table llx_a_akti
+
+|------
+|Column|Type|Null|Default
+|------
+|//**ID_akta**//|int(11)|No|
+|**ID_predmeta**|int(11)|No|
+|**urb_broj**|varchar(10)|No|
+|fk_ecm_file|int(11)|No|
+|datum_kreiranja|timestamp|No|current_timestamp()
+|fk_user_creat|int(11)|No|
+== Dumping data for table llx_a_akti
+
+|10|1|01|61|2025-09-15 20:34:30|1
+|11|1|02|64|2025-09-16 07:20:45|1
+|12|1|03|70|2025-09-16 10:14:17|1
+|13|2|01|74|2025-09-16 10:28:00|1
+|14|5|01|83|2025-09-17 19:29:20|1
+|15|3|01|85|2025-09-18 12:27:08|1
+|16|3|02|86|2025-09-18 19:45:07|1
+== Table structure for table llx_a_arhiva
+
+|------
+|Column|Type|Null|Default
+|------
+|//**ID_arhive**//|int(11)|No|
+|ID_predmeta|int(11)|No|
+|klasa_predmeta|varchar(50)|No|
+|naziv_predmeta|text|No|
+|lokacija_arhive|varchar(500)|No|
+|broj_dokumenata|int(11)|Yes|0
+|razlog_arhiviranja|text|Yes|NULL
+|datum_arhiviranja|timestamp|No|current_timestamp()
+|fk_user_arhivirao|int(11)|No|
+|status_arhive|enum('active', 'deleted')|Yes|active
+|fk_arhivska_gradiva|int(11)|Yes|NULL
+|postupak_po_isteku|enum('predaja_arhivu', 'ibp_izlucivanje', 'ibp_brisanje')|Yes|predaja_arhivu
+|rok_cuvanja_godina|int(11)|Yes|0
+== Dumping data for table llx_a_arhiva
+
+|4|2|111-11/25-12/2|Marijance test|ecm/SEUP/Arhiva/111-11_25-12_2-Marijance_test/|9|Neko se zajebava|2025-09-18 14:28:53|1|active|1|ibp_izlucivanje|8
+|5|5|111-11/25-12/5|tttt|ecm/SEUP/Arhiva/111-11_25-12_5-tttt/|2|5t6|2025-09-18 15:47:05|1|active|1|predaja_arhivu|8
+|6|8|111-11/25-12/8|Kec 11|ecm/SEUP/Arhiva/111-11_25-12_8-Kec_11/|0| |2025-09-18 19:46:59|1|active|3|ibp_izlucivanje|8
+== Table structure for table llx_a_arhivska_gradiva
+
+|------
+|Column|Type|Null|Default
+|------
+|//**rowid**//|int(10)|No|
+|**oznaka**|varchar(100)|No|
+|vrsta_gradiva|varchar(255)|No|
+|opisi_napomene|text|Yes|NULL
+|datec|datetime|No|current_timestamp()
+|tms|timestamp|No|current_timestamp()
+== Dumping data for table llx_a_arhivska_gradiva
+
+|1|03|Živio Plenki 100 Godina|Jebemo mi tako naše kokoši|2025-09-18 12:50:52|2025-09-18 12:50:52
+|3|8922|Kec seronja|NULL|2025-09-18 19:44:18|2025-09-18 19:44:18
+|4|095|Toma jede govna|NULL|2025-09-18 19:44:37|2025-09-18 19:44:37
+== Table structure for table llx_a_interna_oznaka_korisnika
+
+|------
+|Column|Type|Null|Default
+|------
+|//**ID**//|int(11)|No|
+|ID_ustanove|int(11)|No|
+|ime_prezime|varchar(255)|No|
+|**rbr**|int(11)|No|
+|naziv|varchar(255)|No|
+== Dumping data for table llx_a_interna_oznaka_korisnika
+
+|1|1|SuperAdmin|1|Kozojeb
+== Table structure for table llx_a_klasifikacijska_oznaka
+
+|------
+|Column|Type|Null|Default
+|------
+|//**ID_klasifikacijske_oznake**//|int(11)|No|
+|ID_ustanove|int(11)|No|
+|**klasa_broj**|varchar(10)|No|
+|**sadrzaj**|varchar(10)|No|
+|**dosje_broj**|varchar(10)|No|
+|vrijeme_cuvanja|int(11)|No|0
+|opis_klasifikacijske_oznake|text|Yes|NULL
+== Dumping data for table llx_a_klasifikacijska_oznaka
+
+|1|1|111|11|12|8|Jebi se
+== Table structure for table llx_a_oznaka_ustanove
+
+|------
+|Column|Type|Null|Default
+|------
+|//**ID_ustanove**//|int(11)|No|
+|**singleton**|tinyint(1)|Yes|1
+|code_ustanova|varchar(20)|No|
+|name_ustanova|varchar(255)|No|
+== Dumping data for table llx_a_oznaka_ustanove
+
+|1|1|0000-1-2|Pizduns d.o.o.
+== Table structure for table llx_a_posiljatelji
+
+|------
+|Column|Type|Null|Default
+|------
+|//**rowid**//|int(10)|No|
+|naziv|varchar(255)|No|
+|adresa|varchar(255)|Yes|NULL
+|**oib**|varchar(32)|Yes|NULL
+|telefon|varchar(64)|Yes|NULL
+|kontakt_osoba|varchar(255)|Yes|NULL
+|email|varchar(255)|Yes|NULL
+|datec|datetime|No|current_timestamp()
+|tms|timestamp|No|current_timestamp()
+== Dumping data for table llx_a_posiljatelji
+
+|1|Tomislav G|Grgin dol 46, Požega|32165498733|+385998510718|Marko Fušer|8core.eu@gmail.com|2025-09-17 11:41:37|2025-09-17 11:41:37
+|2|Perica Ešegović-Bosanac| |32165498788|+385998510718| |hrvojesertic@gmail.com|2025-09-17 12:06:52|2025-09-17 12:06:52
+|3|Perica Ešegović-Krkan|Grgin dol 11, Požega|32165498755|+385998510333|Marko Peder|andrea@8core.hr|2025-09-17 12:08:34|2025-09-17 12:08:34
+|4|Marijana grizelj-paulić|kalvarija 29|12345678910|09944598306|Marijana|marijana@pszupanija.hr|2025-09-17 13:12:57|2025-09-17 13:12:57
+|5|Pero Perić|adresa 1|12345678921|09998555|mmmm mmm|nnn@gmail.com|2025-09-18 07:37:28|2025-09-18 07:37:28
+== Table structure for table llx_a_predmet
+
+|------
+|Column|Type|Null|Default
+|------
+|//**ID_predmeta**//|int(11)|No|
+|**klasa_br**|varchar(10)|No|
+|**sadrzaj**|varchar(10)|No|
+|**dosje_broj**|varchar(10)|No|
+|**godina**|varchar(2)|No|
+|**predmet_rbr**|int(11)|No|
+|naziv_predmeta|text|No|
+|ID_ustanove|int(11)|No|
+|ID_interna_oznaka_korisnika|int(11)|No|
+|ID_klasifikacijske_oznake|int(11)|No|
+|vrijeme_cuvanja|int(11)|No|
+|tstamp_created|timestamp|No|current_timestamp()
+|fk_posiljatelj|int(11)|Yes|NULL
+|datum_zaprimljeno|datetime|Yes|NULL
+|naziv|varchar(255)|Yes|NULL
+|zaprimljeno_datum|datetime|Yes|NULL
+== Dumping data for table llx_a_predmet
+
+|1|111|11|12|25|1|Jebite se pizduni|1|1|1|8|2025-09-05 07:55:33|NULL|NULL|NULL|NULL
+|2|111|11|12|25|2|Marijance test|1|1|1|8|2025-09-16 10:26:42|NULL|NULL|NULL|NULL
+|3|111|11|12|25|3|444|1|1|1|8|2025-09-16 18:18:22|NULL|NULL|NULL|NULL
+|4|111|11|12|25|4|test|1|1|1|8|2025-09-17 19:27:51|NULL|NULL|Marijana grizelj-paulić|NULL
+|5|111|11|12|25|5|tttt|1|1|1|8|2025-09-17 19:28:39|NULL|NULL|Tomislav G|2025-09-10 02:00:00
+|6|111|11|12|25|6|222|1|1|1|8|2025-09-17 19:52:24|NULL|NULL|Marijana grizelj-paulić|2025-09-03 02:00:00
+|7|111|11|12|25|7|predmet 2|1|1|1|8|2025-09-18 07:38:22|NULL|NULL|Pero Perić|2025-09-17 02:00:00
+|8|111|11|12|25|8|Kec 11|1|1|1|8|2025-09-18 19:46:28|NULL|NULL|Tomislav G|2025-09-04 02:00:00
+== Table structure for table llx_a_predmet_stranka
+
+|------
+|Column|Type|Null|Default
+|------
+|//**rowid**//|int(11)|No|
+|ID_predmeta|int(11)|No|
+|fk_soc|int(11)|No|
+|role|varchar(50)|Yes|creator
+|date_stranka_opened|datetime|Yes|NULL
+== Dumping data for table llx_a_predmet_stranka
+
+== Table structure for table llx_a_predmet_tagovi
+
+|------
+|Column|Type|Null|Default
+|------
+|//**rowid**//|int(11)|No|
+|**fk_predmet**|int(11)|No|
+|**fk_tag**|int(11)|No|
+== Dumping data for table llx_a_predmet_tagovi
+
+|1|4|2
+|2|5|1
+|3|6|2
+|4|8|2
+== Table structure for table llx_a_prilozi
+
+|------
+|Column|Type|Null|Default
+|------
+|//**ID_priloga**//|int(11)|No|
+|**ID_akta**|int(11)|No|
+|ID_predmeta|int(11)|No|
+|**prilog_rbr**|varchar(10)|No|
+|fk_ecm_file|int(11)|No|
+|datum_kreiranja|timestamp|No|current_timestamp()
+|fk_user_creat|int(11)|No|
+== Dumping data for table llx_a_prilozi
+
+|16|10|1|01|62|2025-09-15 20:36:07|1
+|17|10|1|02|63|2025-09-15 20:39:41|1
+|18|11|1|01|66|2025-09-16 07:21:10|1
+|19|11|1|02|67|2025-09-16 07:21:10|1
+|20|11|1|03|68|2025-09-16 07:21:10|1
+|21|11|1|04|69|2025-09-16 07:21:10|1
+|22|12|1|01|71|2025-09-16 10:14:44|1
+|23|12|1|02|72|2025-09-16 10:19:22|1
+|24|12|1|03|73|2025-09-16 10:20:58|1
+|25|13|2|01|75|2025-09-16 14:55:24|1
+|26|13|2|02|76|2025-09-16 14:55:24|1
+|27|13|2|03|77|2025-09-16 14:55:24|1
+|28|13|2|04|78|2025-09-16 14:55:24|1
+|29|13|2|05|79|2025-09-16 14:55:24|1
+|30|13|2|06|80|2025-09-16 14:55:24|1
+|31|13|2|07|81|2025-09-16 14:55:24|1
+|32|13|2|08|82|2025-09-16 14:55:24|1
+|33|14|5|01|84|2025-09-17 19:53:50|1
+|34|15|3|01|87|2025-09-18 19:45:20|1
+== Table structure for table llx_a_tagovi
+
+|------
+|Column|Type|Null|Default
+|------
+|//**rowid**//|int(11)|No|
+|**tag**|varchar(100)|No|
+|color|varchar(20)|Yes|blue
+|**entity**|int(11)|No|1
+|date_creation|datetime|No|
+|fk_user_creat|int(11)|No|
+== Dumping data for table llx_a_tagovi
+
+|1|Jebo mater|blue|1|2025-09-17 10:22:39|1
+|2|Jebo ti svoju|purple|1|2025-09-17 10:22:49|1
+== Table structure for table llx_a_trece_osobe
+
+|------
+|Column|Type|Null|Default
+|------
+|//**ID_trece_osobe**//|int(11)|No|
+|ID_ustanove|int(11)|No|
+|naziv_ime_prezime|varchar(255)|No|
+|adresa|varchar(500)|Yes|NULL
+|**oib**|varchar(11)|No|
+|kontakt_telefon|varchar(50)|Yes|NULL
+|kontakt_osoba|varchar(255)|Yes|NULL
+|email|varchar(255)|Yes|NULL
+|date_creation|datetime|No|current_timestamp()
+|fk_user_creat|int(11)|No|
+|**entity**|int(11)|No|1
+== Dumping data for table llx_a_trece_osobe
+
+|1|1|Tomislav G|Grgin dol 46, Požega|14484857067|+385998510717|Ivica|8core.eu@gmail.com|2025-09-17 11:27:24|1|1
+== Table structure for table llx_ecm_directories
+
+|------
+|Column|Type|Null|Default
+|------
+|//**rowid**//|int(11)|No|
+|**label**|varchar(64)|No|
+|**entity**|int(11)|No|1
+|**fk_parent**|int(11)|Yes|NULL
+|description|varchar(255)|No|
+|cachenbofdoc|int(11)|No|0
+|fullpath|varchar(750)|Yes|NULL
+|extraparams|varchar(255)|Yes|NULL
+|date_c|datetime|Yes|NULL
+|tms|timestamp|No|current_timestamp()
+|fk_user_c|int(11)|Yes|NULL
+|fk_user_m|int(11)|Yes|NULL
+|note_private|text|Yes|NULL
+|note_public|text|Yes|NULL
+|acl|text|Yes|NULL
+== Dumping data for table llx_ecm_directories
+
+== Table structure for table llx_ecm_directories_extrafields
+
+|------
+|Column|Type|Null|Default
+|------
+|//**rowid**//|int(11)|No|
+|tms|timestamp|No|current_timestamp()
+|**fk_object**|int(11)|No|
+|import_key|varchar(14)|Yes|NULL
+== Dumping data for table llx_ecm_directories_extrafields
+
+== Table structure for table llx_ecm_files
+
+|------
+|Column|Type|Null|Default
+|------
+|//**rowid**//|int(11)|No|
+|ref|varchar(128)|Yes|NULL
+|label|varchar(128)|No|
+|share|varchar(128)|Yes|NULL
+|share_pass|varchar(32)|Yes|NULL
+|**entity**|int(11)|No|1
+|**filepath**|varchar(255)|No|
+|**filename**|varchar(255)|No|
+|src_object_type|varchar(64)|Yes|NULL
+|src_object_id|int(11)|Yes|NULL
+|agenda_id|int(11)|Yes|NULL
+|fullpath_orig|varchar(750)|Yes|NULL
+|description|varchar(255)|Yes|NULL
+|keywords|varchar(750)|Yes|NULL
+|content|text|Yes|NULL
+|cover|varchar(32)|Yes|NULL
+|position|int(11)|Yes|NULL
+|gen_or_uploaded|varchar(12)|Yes|NULL
+|extraparams|varchar(255)|Yes|NULL
+|date_c|datetime|Yes|NULL
+|tms|timestamp|No|current_timestamp()
+|fk_user_c|int(11)|Yes|NULL
+|fk_user_m|int(11)|Yes|NULL
+|note_private|text|Yes|NULL
+|note_public|text|Yes|NULL
+|acl|text|Yes|NULL
+|digital_signature|tinyint(1)|Yes|0
+|signature_info|longtext|Yes|NULL
+|signature_date|datetime|Yes|NULL
+|signer_name|varchar(255)|Yes|NULL
+|signature_status|enum('valid', 'invalid', 'expired', 'unknown')|Yes|unknown
+== Dumping data for table llx_ecm_files
+
+|74|bdf93ec32f4f7c6e2b8802d2b5548e57|1.  GI 2024 -Sažetak računa prihoda i rashoda i računa financiranja.xlsx|NULL|NULL|1|ecm/SEUP/Arhiva/111-11_25-12_2-Marijance_test|1.  GI 2024 -Sažetak računa prihoda i rashoda i računa financiranja.xlsx|NULL|NULL|NULL|NULL|Scanned from filesystem|NULL|NULL|NULL|1|uploaded|NULL|2025-09-16 08:27:11|2025-09-18 14:28:53|1|1|NULL|NULL|NULL|0|NULL|NULL|NULL|unknown
+|75|71b813b3702dabb9ee45bb95dcaa76a5|2. GI 2024 - Račun prihoda i rashoda prema ekonomskoj klasifikaciji.xlsx|NULL|NULL|1|ecm/SEUP/Arhiva/111-11_25-12_2-Marijance_test|2. GI 2024 - Račun prihoda i rashoda prema ekonomskoj klasifikaciji.xlsx|NULL|NULL|NULL|NULL|Scanned from filesystem|NULL|NULL|NULL|2|uploaded|NULL|2025-09-16 08:27:11|2025-09-18 14:28:53|1|1|NULL|NULL|NULL|0|NULL|NULL|NULL|unknown
+|76|a1409b365688c8c8cd951bc345e57a3e|3. GI 2024 - Račun prihoda i rashoda prema izvorima financiranja.xlsx|NULL|NULL|1|ecm/SEUP/Arhiva/111-11_25-12_2-Marijance_test|3. GI 2024 - Račun prihoda i rashoda prema izvorima financiranja.xlsx|NULL|NULL|NULL|NULL|Scanned from filesystem|NULL|NULL|NULL|3|uploaded|NULL|2025-09-16 08:27:11|2025-09-18 14:28:53|1|1|NULL|NULL|NULL|0|NULL|NULL|NULL|unknown
+|77|b613cde210b756cc5efb2064731a2b12|4. GI 2024-  Račun prihoda i rashoda prema  funkcijskoj klasifikaciji.xlsx|NULL|NULL|1|ecm/SEUP/Arhiva/111-11_25-12_2-Marijance_test|4. GI 2024-  Račun prihoda i rashoda prema  funkcijskoj klasifikaciji.xlsx|NULL|NULL|NULL|NULL|Scanned from filesystem|NULL|NULL|NULL|4|uploaded|NULL|2025-09-16 08:27:11|2025-09-18 14:28:53|1|1|NULL|NULL|NULL|0|NULL|NULL|NULL|unknown
+|78|1d5ac8fc663d49417ce65a524c600916|5. GI 2024 -  Račun financiranja  prema ekonimskoj klasifikaciji.xlsx|NULL|NULL|1|ecm/SEUP/Arhiva/111-11_25-12_2-Marijance_test|5. GI 2024 -  Račun financiranja  prema ekonimskoj klasifikaciji.xlsx|NULL|NULL|NULL|NULL|Scanned from filesystem|NULL|NULL|NULL|5|uploaded|NULL|2025-09-16 08:27:11|2025-09-18 14:28:53|1|1|NULL|NULL|NULL|0|NULL|NULL|NULL|unknown
+|79|66d1687ec507e8bf852180230da62f87|6. GI 2024- Račun  financiranja  premaizvorima financiranjai.xlsx|NULL|NULL|1|ecm/SEUP/Arhiva/111-11_25-12_2-Marijance_test|6. GI 2024- Račun  financiranja  premaizvorima financiranjai.xlsx|NULL|NULL|NULL|NULL|Scanned from filesystem|NULL|NULL|NULL|6|uploaded|NULL|2025-09-16 08:27:22|2025-09-18 14:28:53|1|1|NULL|NULL|NULL|0|NULL|NULL|NULL|unknown
+|80|489b89ec9eb4685a3dd78dd9855be780|8. GI 2024-  Posebni dio -  programska klasifikacija.xlsx|NULL|NULL|1|ecm/SEUP/Arhiva/111-11_25-12_2-Marijance_test|8. GI 2024-  Posebni dio -  programska klasifikacija.xlsx|NULL|NULL|NULL|NULL|Scanned from filesystem|NULL|NULL|NULL|7|uploaded|NULL|2025-09-16 08:27:22|2025-09-18 14:28:53|1|1|NULL|NULL|NULL|0|NULL|NULL|NULL|unknown
+|81|78595cccf560e469d216d854d527262e|Obrazloženje (00000003).docx|NULL|NULL|1|ecm/SEUP/Arhiva/111-11_25-12_2-Marijance_test|Obrazloženje (00000003).docx|NULL|NULL|NULL|NULL|Scanned from filesystem|NULL|NULL|NULL|8|uploaded|NULL|2025-09-16 08:27:22|2025-09-18 14:28:53|1|1|NULL|NULL|NULL|0|NULL|NULL|NULL|unknown
+|82|2ffca7e6a82728b036b1c8163bde40b8|Odluka o raspodjeli- JUZUZP 2024 (00000003).docx|NULL|NULL|1|ecm/SEUP/Arhiva/111-11_25-12_2-Marijance_test|Odluka o raspodjeli- JUZUZP 2024 (00000003).docx|NULL|NULL|NULL|NULL|Scanned from filesystem|NULL|NULL|NULL|9|uploaded|NULL|2025-09-16 08:27:23|2025-09-18 14:28:53|1|1|NULL|NULL|NULL|0|NULL|NULL|NULL|unknown
+|83|fc6c0ca6d40bd5e99f12642d35c12bcc|invoice5.pdf|NULL|NULL|1|ecm/SEUP/Arhiva/111-11_25-12_5-tttt|invoice5.pdf|NULL|NULL|NULL|NULL|Akt za predmet 5|NULL|NULL|NULL|1|uploaded|NULL|2025-09-17 17:29:20|2025-09-18 15:47:05|1|1|NULL|NULL|NULL|0|[]|NULL|NULL|unknown
+|84|88bbe6c9813abf5f4d63f8d6ea367448|Omot spisa - Omot_111-11_25-12_5_20250917_172932.pdf|NULL|NULL|1|ecm/SEUP/Arhiva/111-11_25-12_5-tttt|Omot_111-11_25-12_5_20250917_172932.pdf|NULL|NULL|NULL|NULL|Automatski generirani omot spisa za predmet 5|NULL|NULL|NULL|2|generated|NULL|2025-09-17 17:29:32|2025-09-18 15:47:05|1|1|NULL|NULL|NULL|0|{&quot;signature_date&quot;:&quot;2025-09-17 17:29:32&quot;}|NULL|NULL|unknown
+|85|f24bcf80424e0dc24a3a0e60a2e3868a|Screenshot_20.jpg|NULL|NULL|1|SEUP/Predmeti/2025/111-11_25-12_3-444|Screenshot_20.jpg|NULL|NULL|NULL|NULL|Akt za predmet 3|NULL|NULL|NULL|1|uploaded|NULL|2025-09-18 10:27:08|2025-09-18 10:27:08|1|1|NULL|NULL|NULL|0|NULL|NULL|NULL|unknown
+|86|ae812fce80a12a918eb714b4fdd6f971|new11.docx|NULL|NULL|1|SEUP/Predmeti/2025/111-11_25-12_3-444|new11.docx|NULL|NULL|NULL|NULL|Akt za predmet 3|NULL|NULL|NULL|2|uploaded|NULL|2025-09-18 17:45:07|2025-09-18 17:45:07|1|1|NULL|NULL|NULL|0|NULL|NULL|NULL|unknown
+|87|8c90f35455bfa1f0c4649ab8a76db940|annotated_earth-moon_from_saturn_1920x10801.jpg|NULL|NULL|1|SEUP/Predmeti/2025/111-11_25-12_3-444|annotated_earth-moon_from_saturn_1920x10801.jpg|NULL|NULL|NULL|NULL|Prilog za predmet 3|NULL|NULL|NULL|3|uploaded|NULL|2025-09-18 17:45:20|2025-09-18 17:45:20|1|1|NULL|NULL|NULL|0|NULL|NULL|NULL|unknown
+== Table structure for table llx_ecm_files_extrafields
+
+|------
+|Column|Type|Null|Default
+|------
+|//**rowid**//|int(11)|No|
+|tms|timestamp|No|current_timestamp()
+|**fk_object**|int(11)|No|
+|import_key|varchar(14)|Yes|NULL
+== Dumping data for table llx_ecm_files_extrafields
+
