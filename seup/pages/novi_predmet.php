@@ -1079,12 +1079,25 @@ document.addEventListener("DOMContentLoaded", function() {
             let datumOtvaranjaTimestamp = null;
 
             if (datumInput.value) {
-                const date = new Date(datumInput.value);
+                const selectedDate = new Date(datumInput.value);
                 const now = new Date();
+                
+                // Validate selected date - must be within current year and not in future
+                const currentYear = now.getFullYear();
+                const selectedYear = selectedDate.getFullYear();
+                
+                if (selectedYear < currentYear || selectedDate > now) {
+                    showMessage('Datum mora biti iz tekuće godine i ne može biti u budućnosti', 'error');
+                    this.classList.remove('seup-loading');
+                    return;
+                }
+                
+                // Use selected date with current time
                 datumOtvaranjaTimestamp = 
-                    `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')} ` +
+                    `${selectedDate.getFullYear()}-${(selectedDate.getMonth() + 1).toString().padStart(2, '0')}-${selectedDate.getDate().toString().padStart(2, '0')} ` +
                     `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`;
             } else {
+                // Use current date and time if no date selected
                 const now = new Date();
                 datumOtvaranjaTimestamp =
                     `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')} ` +
@@ -1107,10 +1120,23 @@ document.addEventListener("DOMContentLoaded", function() {
             // Add zaprimljeno date if selected
             const datumZaprimljeno = document.getElementById('datumZaprimljeno').value;
             if (datumZaprimljeno) {
-                const zaprimljenoDate = new Date(datumZaprimljeno);
+                const selectedZaprimljenoDate = new Date(datumZaprimljeno);
+                const now = new Date();
+                
+                // Validate zaprimljeno date - must be within current year and not in future
+                const currentYear = now.getFullYear();
+                const selectedYear = selectedZaprimljenoDate.getFullYear();
+                
+                if (selectedYear < currentYear || selectedZaprimljenoDate > now) {
+                    showMessage('Datum zaprimanja mora biti iz tekuće godine i ne može biti u budućnosti', 'error');
+                    this.classList.remove('seup-loading');
+                    return;
+                }
+                
+                // Use selected zaprimljeno date with current time
                 const zaprimljenoTimestamp = 
-                    `${zaprimljenoDate.getFullYear()}-${(zaprimljenoDate.getMonth() + 1).toString().padStart(2, '0')}-${zaprimljenoDate.getDate().toString().padStart(2, '0')} ` +
-                    `${zaprimljenoDate.getHours().toString().padStart(2, '0')}:${zaprimljenoDate.getMinutes().toString().padStart(2, '0')}:${zaprimljenoDate.getSeconds().toString().padStart(2, '0')}`;
+                    `${selectedZaprimljenoDate.getFullYear()}-${(selectedZaprimljenoDate.getMonth() + 1).toString().padStart(2, '0')}-${selectedZaprimljenoDate.getDate().toString().padStart(2, '0')} ` +
+                    `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`;
                 formData.append("datumZaprimljeno", zaprimljenoTimestamp);
             }
 
