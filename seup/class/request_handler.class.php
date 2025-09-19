@@ -126,6 +126,7 @@ class Request_Handler
         $posiljatelj_naziv,
         $datum_zaprimljeno,
         $datum_otvaranja
+        $datum_otvaranja
       );
 
       if ($db_query === false) {
