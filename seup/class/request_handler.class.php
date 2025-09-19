@@ -124,7 +124,8 @@ class Request_Handler
         $id_klasifikacijske_oznake,
         $vrijeme_cuvanja,
         $posiljatelj_naziv,
-        $datum_zaprimljeno
+        $datum_zaprimljeno,
+        $datum_otvaranja
       );
 
       if ($db_query === false) {
